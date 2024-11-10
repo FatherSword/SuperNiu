@@ -1,15 +1,151 @@
-#nav_list{
-    display:grid;
-    grid-template-columns:repeat(5,18%);
-    grid-template-rows:100%;
+/* 全局样式 */
+*{
+    color: #9e9d9d; /* 浅色文字 */
 }
-#nav_list li{
-    display:flex;
-    background:linear-gradient(hsl(257, 72%, 65%),hsl(0, 42%, 7%));
-    border:3px solid rgb(208, 241, 236);
-    border-radius:10px;
-    width:90% !important;
-    height:2.5em;
-    justify-content:center;
-    align-items:center;
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #121212; /* 深色背景 */
+}
+
+strong{
+    font-weight:800;
+}
+
+h2,h3{
+    color:hsl(29, 36%, 47%);
+}
+/* 顶部导航栏样式 */
+header {
+    background-color: #1E1E1E; /* 黑色背景 */
+    border-bottom: 1px solid #333; /* 边框 */
+    padding: 10px 0;
+}
+
+nav {
+    height: 100px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 均分六列 */
+    grid-template-rows: 100px; /* 行高 */
+    place-items: center; /* 垂直居中 */
+}
+
+nav img {
+    grid-column: 1; 
+    height: 80%; /* 图片高度 */
+    border-radius: 50%; /* 圆形效果 */
+}
+
+nav p {
+    color: hsl(43, 81%, 69%); /* 金色文字 */
+    text-align: center;
+    font-weight: bold; /* 加粗 */
+}
+
+nav p:hover {
+    color: hsl(180, 17%, 33%); 
+}
+
+nav div{
+    width:90%;
+    padding:3%;
+}
+
+nav div:hover{
+    background-color: hsl(0, 4%, 54%);
+    border-radius: 4px;
+}
+
+/* 搜索框样式 */
+.search {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.search input {
+    padding: 10px;
+    width: 60%;
+    border: 1px solid #555; /* 输入框边框颜色 */
+    border-radius: 4px;
+    background-color: #333; /* 输入框背景 */
+    color: #E0E0E0; /* 输入框文本颜色 */
+}
+
+/* 横幅区域样式 */
+.banner {
+    height: 300px;
+    background-color: #1A1A1A; /* 深色背景 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner img{
+    width:95%;
+    height:275px;
+    box-shadow: 0 0 18px rgba(181, 241, 238, 0.7);/* 设置阴影效果 */
+    border-radius: 10px;      /* 可选：设置边角圆润度 */
+}
+.banner img:hover{
+    box-shadow: 0 0 18px rgba(42, 56, 55, 0.7);
+    height:280px;
+    transition: all 0.3s; 
+}
+/* 公司介绍样式 */
+.company-introduction {
+    padding: 20px;
+    background-color: #1E1E1E; /* 深色背景 */
+    margin: 20px;
+    border: 1px solid #333; /* 边框 */
+    border-radius: 4px; /* 边角圆润 */
+}
+
+#about *{
+    text-indent:1rem;
+    text-align: justify;
+}
+
+/* 热门产品展示样式 */
+.featured-products {
+    padding: 20px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 自适应列数 */
+    gap: 15px; /* 列间距 */
+}
+
+.product-card {
+    background-color: #2A2A2A; /* 产品卡片背景色 */
+    padding: 15px;
+    border: 1px solid #444; /* 边框 */
+    border-radius: 4px; /* 边角圆润 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* 阴影效果 */
+    transition: transform 0.2s; /* 添加过度效果 */
+}
+
+.product-card:hover {
+    transform: scale(1.02); /* 鼠标悬停放大效果 */
+}
+
+/* 底部样式 */
+footer {
+    background-color: #1E1E1E; /* 底部背景色 */
+    color: #E0E0E0; /* 字体颜色 */
+    text-align: center;
+    padding: 15px 0;
+}
+
+footer .social-media a {
+    color:hsl(43, 81%, 69%); /* 金色 */
+    margin: 0 10px;
+    text-decoration: none; /* 去掉下划线 */
+}
+
+footer .social-media a:hover {
+    text-decoration: underline; /* 悬停效果 */
 }
