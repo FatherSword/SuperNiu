@@ -1,0 +1,15 @@
+#nav_list{
+    display:grid;
+    grid-template-columns:repeat(5,18%);
+    grid-template-rows:100%;
+}
+#nav_list li{
+    display:flex;
+    background:linear-gradient(hsl(257, 72%, 65%),hsl(0, 42%, 7%));
+    border:3px solid rgb(208, 241, 236);
+    border-radius:10px;
+    width:90% !important;
+    height:2.5em;
+    justify-content:center;
+    align-items:center;
+}
