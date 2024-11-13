@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>注册页面</title>
+    <title>Create an Account</title>
     <link rel="stylesheet" href="signup.css">
 </head>
 <body>
     <div class="container">
         <h1>Create an Account</h1>
-        <form action='http://localhost:3000/signup' method="POST" id="siupform">
+        <form action='http://localhost:3000/signup' method="POST" id="siupform" onsubmit="back(event);">
             <div class="form-group">
                 <label for="username">Name</label>
                 <input type="text" id="username" name="username" required>
@@ -23,21 +23,42 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <button type="submit" class="btn">Confirm</button>
+            <div id="error-message" style="color: red; display: none;"></div> <!-- 错误消息展示 -->
         </form>
     </div>
     <script>
-        function clearForm(form) {
-        for (let element of form.elements) {
-            if (element.tagName === 'input' || element.tagName === 'textarea' || element.tagName === 'SELECT') {
-                element.value = '';
-            }
-        }
-        }
+        function back(event) {
+            event.preventDefault(); // 阻止默认提交
 
-        window.addEventListener('load', function() {
-        clearForm(document.getElementById('siupform'));
-        });
+            const form = document.getElementById('siupform');
+            const formData = new FormData(form);
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.style.display = 'none'; // 隐藏错误消息
 
+            fetch(form.action, {
+                method: 'POST',
+                body: new URLSearchParams(formData) // 使用 URLSearchParams 格式化数据
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json(); // 返回 JSON 数据
+                } else {
+                    throw new Error('提交失败: ' + response.status); // 处理错误
+                }
+            })
+            .then(data => {
+                console.log(data.message); // 打印成功消息
+                alert(data.message); // 提示用户
+                // AJAX 提交成功后跳转
+                form.reset(); // 重置表单
+                window.location.href = 'index.html';
+            })
+            .catch(error => {
+                console.error('错误:', error);
+                errorMessage.innerText = error.message; // 显示错误消息
+                errorMessage.style.display = 'block'; // 显示错误消息
+            });
+        }
     </script>
 </body>
 </html>

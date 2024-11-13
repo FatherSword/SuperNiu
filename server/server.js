@@ -2,6 +2,7 @@ const http = require('http');
 const mysql = require('mysql2');
 const url = require('url');
 const querystring = require('querystring');
+const bcrypt = require('bcrypt'); // 引入 bcrypt
 
 const PORT = 3000;
 
@@ -36,25 +37,6 @@ const server = http.createServer((req, res) => {
         return;
     }
 
-    // 处理产品信息请求
-    if (req.method === 'GET' && req.url.startsWith('/product/')) {
-        const productId = Number(req.url.split('/')[2]);
-
-        db.execute('SELECT * FROM featured_products WHERE product_id = ?', [productId], (err, results) => {
-            if (err) {
-                res.writeHead(500, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ error: err.message }));
-                return;
-            }
-            if (results.length === 0) {
-                res.writeHead(404, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ message: '产品不存在' }));
-                return;
-            }
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify(results[0]));
-        });
-    }
     // 处理用户注册请求
     else if (req.method === 'POST' && req.url === '/signup') {
         let body = '';
@@ -66,17 +48,31 @@ const server = http.createServer((req, res) => {
         req.on('end', () => {
             const { username, email, password } = querystring.parse(body);
     
-            // 这里可以插入数据库逻辑
-            db.execute('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', 
-                [username, email, password], (err) => {
-                    if (err) {
-                        res.writeHead(500, { 'Content-Type': 'application/json' });
-                        res.end(JSON.stringify({ error: err.message }));
-                        return;
-                    }
-                    res.writeHead(201, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ message: '注册成功' }));
-                });
+            // 检查参数有效性
+            if (!username || !email || !password) {
+                res.writeHead(400, { 'Content-Type': 'application/json' });
+                return res.end(JSON.stringify({ error: '所有字段都是必填的' }));
+            }
+
+            // 对密码进行哈希处理
+            bcrypt.hash(password, 10, (err, hash) => {
+                if (err) {
+                    res.writeHead(500, { 'Content-Type': 'application/json' });
+                    return res.end(JSON.stringify({ error: '密码加密失败' }));
+                }
+
+                // 插入用户信息到数据库
+                db.execute('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', 
+                    [username, email, hash], (err) => {
+                        if (err) {
+                            res.writeHead(500, { 'Content-Type': 'application/json' });
+                            res.end(JSON.stringify({ error: err.message }));
+                            return;
+                        }
+                        res.writeHead(201, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ message: '注册成功' }));
+                    });
+            });
         });
     } else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
@@ -88,4 +84,5 @@ const server = http.createServer((req, res) => {
 server.listen(PORT, () => {
     console.log(`服务器在 http://localhost:${PORT} 启动`);
 });
+
 
