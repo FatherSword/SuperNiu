@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>产品详情</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="product-card" style="text-align: center;">
+    <h1 id="product-name"></h1>
+    <p id="product-markshara"></p>
+    <p id="product-repra"></p>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        fetch(`http://localhost:3000/product/${productId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('product-name').innerText = data.product_name;
+                document.getElementById('product-markshara').innerText = `market share rate: ${data.market_share}`;
+                document.getElementById('product-repra').innerText = `repurchase rate: ${data.repurchase_rate}`;
+            })
+            .catch(error => {
+                console.error('获取产品信息失败:', error);
+            });
+    </script>
+</body>
+</html>

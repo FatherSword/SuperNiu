@@ -30,8 +30,8 @@ This project aims to establish an official website for SuperNiu Technology Co., 
 
 ## Tech Stack
 
-- **Frontend**: Vue.js
-- **Backend**: Node.js, Express
+- **Frontend**: No-frame
+- **Backend**: Node.js
 - **Database**: MySQL
 - **Other Tools**: Git, NPM
 

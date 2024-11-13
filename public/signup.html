@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册页面</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Create an Account</h1>
+        <form action='http://localhost:3000/signup' method="POST" id="siupform">
+            <div class="form-group">
+                <label for="username">Name</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn">Confirm</button>
+        </form>
+    </div>
+    <script>
+        function clearForm(form) {
+        for (let element of form.elements) {
+            if (element.tagName === 'input' || element.tagName === 'textarea' || element.tagName === 'SELECT') {
+                element.value = '';
+            }
+        }
+        }
+
+        window.addEventListener('load', function() {
+        clearForm(document.getElementById('siupform'));
+        });
+
+    </script>
+</body>
+</html>

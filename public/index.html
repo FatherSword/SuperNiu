@@ -7,16 +7,15 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-
     <!-- 顶部导航栏 -->
     <header>
         <nav>
             <img src="../asset/4311731224578_.pic_hd.jpg">
-            <div><p>Product</p></div>
-            <div><p>About us</p></div>
-            <div><p>Client support</p></div>
-            <div><p>Contact us</p></div>
-            <div><p>Sign up</p></div>
+            <div><p onclick="products()">Product</p></div>
+            <div><p onclick="goToAboutUs()">About us</p></div>
+            <div><p onclick="contact(true);">Client support</p></div>
+            <div><p onclick="contact(false);">Contact us</p></div>
+            <div><p onclick="signup()">Sign up</p></div>
         </nav>
         <div class="search">
             <input type="text" placeholder="Search for products...">
@@ -36,7 +35,7 @@
         <p>SuperNiu has been dedicated to water meter production since 2010. Over the past 4 years, 
            we have focused on the Southeast Asian market, especially Malaysia and Indonesia. Our three star -
            product water meters have occupied approximately 10% of the market share in
-           this region. Last year alone, our sales volume reached 80,000 units, showing 
+           this region. Last year alone, our sales volume reached <strong>80,000</strong> units, showing 
            a steady upward trend.</p>
         <p>Customer satisfaction is our <strong>top priority</strong>. Through continuous market research, we are proud
            to announce that over 90% of our customers are highly satisfied with our products. They
@@ -46,22 +45,65 @@
     </section>
     
     <!-- Featured Products -->
-    <section class="featured-products" id="products">
+    <section class="featured-products" id="products" name="products">
         <h2>Featured Products</h2>
         <div class="product-grid">
-            <div class="product-card">
+            <div class="product-card" id="product1" onclick="goToProduct(1)">
                 <!-- Product 1 -->
-                <h3>Product Name 1</h3>
-                <p>Short description of the product.</p>
-                <p>Price: $XX.XX</p>
+                <h3>HydroFlow - 100</h3>
+                <p>Popular, competitive, significant market share</p>
+                <p>Price: Contact us</p>
             </div>
-            <div class="product-card">
+
+            <div class="product-card" id="product2" onclick="goToProduct(2)">
                 <!-- Product 2 -->
-                <h3>Product Name 2</h3>
-                <p>Short description of the product.</p>
-                <p>Price: $XX.XX</p>
+                <h3>AquaMeter - 200</h3>
+                <p>Prominent, influential, strong market position</p>
+                <p>Price: Lower than 0.85$</p>
             </div>
-            <!-- You can continue to add more product cards -->
+
+            <div class="product-card" id="product3" onclick="goToProduct(3)">
+                <!-- Product 3 -->
+                <h3>WaterPro - 300</h3>
+                <p>Reliable, efficient, notable market presence</p>
+                <p>Price: Lower than 0.90$</p>
+            </div>
+            
+            <div class="product-card" id="product4" onclick="goToProduct(4)">
+                <!-- Product 4 -->
+                <h3>FlowMaster - 400</h3>
+                <p>Advanced, robust, competitive advantage</p>
+                <p>Price: Contact us</p>
+            </div>
+            
+            <div class="product-card" id="product5" onclick="goToProduct(5)">
+                <!-- Product 5 -->
+                <h3>LiquidSense - 500</h3>
+                <p>Innovative, versatile, growing market share</p>
+                <p>Price: Lower than 0.50%</p>
+            </div>
+            
+            <div class="product-card" id="product6" onclick="goToProduct(6)">
+                <!-- Product 6 -->
+                <h3>TideTrak - 600</h3>
+                <p>Efficient, effective, improving position</p>
+                <p>Price: Contact us</p>
+            </div>
+            
+            <div class="product-card" id='product7' onclick="goToProduct(7)">
+                <!-- Product 7 -->
+                <h3>WaveWatcher - 700</h3>
+                <p>Smart, reliable, emerging market player</p>
+                <p>Price: Contact us</p>
+            </div>
+            
+            <div class="product-card" id="product8" onclick="goToProduct(8)">
+                <!-- Product 8 -->
+                <h3>CurrentCounter - 800</h3>
+                <p>Dynamic, strategic, niche market focus</p>
+                <p>Price: Contact us</p>
+            </div>
+            
         </div>
     </section>
     <!-- 底部 -->
@@ -77,5 +119,26 @@
         </div>        
         <p>© 2023 SuperNiu Technology Co., Ltd. All rights reserved.</p>
     </footer>    
+    <script>
+        function goToProduct(productId) {
+            window.location.href = `product.html?id=${productId}`;
+        }
+        function goToAboutUs(){
+            window.location.href = `aboutus.html`;
+        }
+        function products(){
+            window.location.href = 'index.html#products'
+        }
+        function contact(boo){
+            if(boo){
+            window.location.href = 'contact.html#client'
+            }else{
+            window.location.href = 'contact.html#contact'
+            }
+        }
+        function signup(){
+            window.location.href = 'signup.html'
+        }
+    </script>
 </body>
 </html>

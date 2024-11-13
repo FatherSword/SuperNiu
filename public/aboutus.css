@@ -1,0 +1,89 @@
+/* 全局设置 */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #181818; /* 暗色背景 */
+    color: #f0f0f0; /* 文字颜色 */
+}
+
+/* 页面头部样式 */
+header {
+    background: #1a1a1a; /* 深灰色背景 */
+    color: #00bfff; /* 亮色标题 */
+    padding: 20px 0;
+    text-align: center;
+    transition: background 0.4s; /* 背景渐变效果 */
+}
+
+header:hover {
+    background: #333; /* 鼠标悬停时变深 */
+}
+
+h1 {
+    margin: 0;
+    font-size: 3em; /* 字体更大 */
+}
+
+/* 主内容区域 */
+main {
+    padding: 30px;
+    max-width: 800px;
+    margin: auto;
+    background: #222; /* 主背景更深 */
+    border-radius: 8px; /* 圆角效果 */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7); /* 深色阴影 */
+}
+
+/* 段落标题样式 */
+h2 {
+    color: #00bfff; /* 突出显示的标题颜色 */
+    border-bottom: 2px solid #00bfff; /* 底部边框 */
+    padding-bottom: 10px; /* 内边距 */
+    transition: color 0.3s; /* 字体颜色渐变效果 */
+}
+
+h2:hover {
+    color: #fff; /* 鼠标悬停时字体变为白色 */
+}
+
+/* 段落样式 */
+p {
+    margin: 1em 0;
+    text-align: justify; /* 对齐 */
+}
+
+/* 页脚样式 */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background: #1a1a1a; /* 与头部相同的背景 */
+    color: #f0f0f0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* 添加过渡效果 */
+footer:hover {
+    background: #333; /* 鼠标悬停时变深 */
+    transition: background 0.4s;
+}
+
+/* 添加按钮样式，例如如果需要在将来添加按钮 */
+.button {
+    display: inline-block;
+    background: #00bfff; /* 亮蓝色按钮 */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.3s; /* 过渡效果 */
+}
+
+.button:hover {
+    background: #007acc; /* 悬停时颜色变暗 */
+    transform: scale(1.05); /* 鼠标悬停时稍微放大 */
+}
