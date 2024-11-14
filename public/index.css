@@ -69,21 +69,6 @@ nav div:hover{
     border-radius: 8px;
 }
 
-/* 搜索框样式 */
-.search {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.search input {
-    padding: 10px;
-    width: 60%;
-    border: 1px solid #555; /* 输入框边框颜色 */
-    border-radius: 4px;
-    background-color: #333; /* 输入框背景 */
-    color: #E0E0E0; /* 输入框文本颜色 */
-}
-
 /* 横幅区域样式 */
 .banner {
     padding-top:5px;
@@ -158,4 +143,16 @@ footer .social-media a {
 
 footer .social-media a:hover {
     text-decoration: underline; /* 悬停效果 */
+}
+
+#profile {
+    display:flex;
+    align-items: center;
+}
+
+#profile p{
+    font-size:1.5rem;
+    width:100% !important;
+    color:hsl(136, 71%, 67%);
+    text-align: center;
 }

@@ -29,12 +29,11 @@
     <script>
         function back(event) {
             event.preventDefault(); // 阻止默认提交
-
             const form = document.getElementById('siupform');
             const formData = new FormData(form);
             const errorMessage = document.getElementById('error-message');
+            localStorage.setItem('name',formData.get('username'));
             errorMessage.style.display = 'none'; // 隐藏错误消息
-
             fetch(form.action, {
                 method: 'POST',
                 body: new URLSearchParams(formData) // 使用 URLSearchParams 格式化数据

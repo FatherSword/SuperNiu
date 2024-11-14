@@ -3,8 +3,10 @@ const mysql = require('mysql2');
 const url = require('url');
 const querystring = require('querystring');
 const bcrypt = require('bcrypt'); // 引入 bcrypt
+const fs = require('fs'); // 引入 fs 模块
+const path = require('path'); // 引入 path 模块
 
-const PORT = 3000;
+const PORT = 3001; // 修改为3001端口以符合要求
 
 // 创建数据库连接
 const db = mysql.createConnection({
@@ -34,6 +36,77 @@ const server = http.createServer((req, res) => {
     if (req.method === 'OPTIONS') {
         res.writeHead(204); // No Content
         res.end();
+        return;
+    }
+
+    // 处理静态文件请求
+    if (req.method === 'GET') {
+        let filePath = '.' + req.url; // 默认就是请求的路径
+        if (filePath === './') {
+            filePath = '../public/index.html'; // 默认返回 index.html
+        } else if (filePath === '/contact.html') {
+            filePath = '../public/contact.html';
+        } else if (filePath === '/signup.html') {
+            filePath = '../public/signup.html';
+        }
+
+        // 获取文件的扩展名
+        const extname = String(path.extname(filePath)).toLowerCase();
+        let contentType = 'text/html'; // 默认为 HTML
+
+        // 根据文件类型设置 Content-Type
+        switch (extname) {
+            case '.js':
+                contentType = 'text/javascript';
+                break;
+            case '.css':
+                contentType = 'text/css';
+                break;
+            case '.json':
+                contentType = 'application/json';
+                break;
+            case '.png':
+                contentType = 'image/png';
+                break;
+            case '.jpg':
+                contentType = 'image/jpg';
+                break;
+            case '.gif':
+                contentType = 'image/gif';
+                break;
+            case '.svg':
+                contentType = 'image/svg+xml';
+                break;
+            case '.wav':
+                contentType = 'audio/wav';
+                break;
+            case '.mp4':
+                contentType = 'video/mp4';
+                break;
+            case '.woff':
+            case '.woff2':
+                contentType = 'application/font-woff';
+                break;
+            case '.ttf':
+                contentType = 'application/font-sfnt';
+                break;
+        }
+
+        // 读取文件并发送响应
+        fs.readFile(filePath, (error, content) => {
+            if (error) {
+                if (error.code == 'ENOENT') {
+                    res.writeHead(404, { 'Content-Type': 'text/html' });
+                    res.end('<h1>404 Not Found</h1>', 'utf-8');
+                } else {
+                    res.writeHead(500);
+                    res.end('Sorry, there was an error: ' + error.code + '..\n');
+                }
+            } else {
+                res.writeHead(200, { 'Content-Type': contentType });
+                res.end(content, 'utf-8');
+            }
+        });
         return;
     }
 
@@ -84,5 +157,6 @@ const server = http.createServer((req, res) => {
 server.listen(PORT, () => {
     console.log(`服务器在 http://localhost:${PORT} 启动`);
 });
+
 
 

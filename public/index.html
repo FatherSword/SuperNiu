@@ -15,13 +15,9 @@
             <div><p onclick="goToAboutUs()">About us</p></div>
             <div><p onclick="contact(true);">Client support</p></div>
             <div><p onclick="contact(false);">Contact us</p></div>
-            <div><p onclick="signup()">Sign up</p></div>
+            <div id="signup"><p onclick="signup()">Sign up</p></div>
         </nav>
-        <div class="search">
-            <input type="text" placeholder="Search for products...">
-        </div>
     </header>
-
     <!-- 横幅区域 -->
     <section class="banner">
         <div class="banner-image">
@@ -120,6 +116,9 @@
         <p>© 2023 SuperNiu Technology Co., Ltd. All rights reserved.</p>
     </footer>    
     <script>
+        window.addEventListener('load',()=>{if(localStorage.getItem('name')){document.getElementById('signup').innerHTML='<p> Hi,'+localStorage.getItem('name')+' </p>';
+                                              document.getElementById('signup').id='profile';
+        }})
         function goToProduct(productId) {
             window.location.href = `product.html?id=${productId}`;
         }

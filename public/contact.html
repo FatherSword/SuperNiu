@@ -41,7 +41,7 @@
         <section id="contact">
             <h2>Contact Us</h2>
             <p>We value your feedback! Please let us know how we can assist you:</p>
-            <form action="#" method="post">
+            <form action="#" method="post" onsubmit="feedback(event);">
                 <label for="name">Your Name:</label>
                 <input type="text" id="name" name="name" required>
                 
@@ -50,7 +50,6 @@
                 
                 <label for="message">Your Message:</label>
                 <textarea id="message" name="message" rows="4" required></textarea>
-                
                 <button type="submit">Send Message</button>
             </form>
         </section>
@@ -58,5 +57,15 @@
     <footer>
         <p>© 2023 SuperNiu. All rights reserved.</p>
     </footer>
+    <script>
+        function feedback(event){
+            event.preventDefault();
+            const success = document.createElement('div')
+            success.id='success'
+            success.innerText = 'Thank you for your feedback! You will be replied in 3 days. See your email then.'
+            document.getElementById('contact').appendChild(success);
+            setTimeout(()=>window.location.href='index.html',2000);
+        }
+    </script>
 </body>
 </html>
