@@ -12,10 +12,8 @@
     <p id="product-repra"></p>
     </div>
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const productId = urlParams.get('id');
-
-        fetch(`http://localhost:3000/product/${productId}`)
+        const productId = localStorage.getItem('productid');
+        fetch(`http://divineseed.top/product.html?id=${productId}`)
             .then(response => response.json())
             .then(data => {
                 document.getElementById('product-name').innerText = data.product_name;
@@ -25,6 +23,7 @@
             .catch(error => {
                 console.error('获取产品信息失败:', error);
             });
+        localStorage.setItem('productid','');
     </script>
 </body>
 </html>

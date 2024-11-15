@@ -28,7 +28,7 @@
     <!-- 公司介绍 -->
     <section class="company-overview" id="about">
         <h2>About Us</h2>
-        <p>SuperNiu has been dedicated to water meter production since 2010. Over the past 4 years, 
+        <p>SuperNiu has been dedicated to water meter production since 2020. Over the past 4 years, 
            we have focused on the Southeast Asian market, especially Malaysia and Indonesia. Our three star -
            product water meters have occupied approximately 10% of the market share in
            this region. Last year alone, our sales volume reached <strong>80,000</strong> units, showing 
@@ -120,7 +120,8 @@
                                               document.getElementById('signup').id='profile';
         }})
         function goToProduct(productId) {
-            window.location.href = `product.html?id=${productId}`;
+            window.location.href = `product.html`;
+            localStorage.setItem('productid',productId);
         }
         function goToAboutUs(){
             window.location.href = `aboutus.html`;
