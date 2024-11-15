@@ -43,11 +43,39 @@ const server = http.createServer((req, res) => {
     if (req.method === 'GET') {
         let filePath = '.' + req.url; // 默认就是请求的路径
         if (filePath === './') {
-            filePath = '../public/index.html'; // 默认返回 index.html
-        } else if (filePath === '/contact.html') {
-            filePath = '../public/contact.html';
-        } else if (filePath === '/signup.html') {
-            filePath = '../public/signup.html';
+            filePath = './public/index.html'; // 默认返回 index.html
+        } else if (filePath === './contact.html') {
+            filePath = './public/contact.html';
+        } else if (filePath === './signup.html') {
+            filePath = './public/signup.html';
+        } else if (filePath.endsWith('.css')) { // 添加支持 CSS 文件
+            filePath = './public' + req.url; // 假设请求的 URL 是 /path/to/file.css
+        } else if (filePath === './index.png') {
+            filePath = './asset/barchart.png';
+        } else if (filePath === './superniu.png') {
+            filePath = './asset/4311731224578_.pic_hd.jpg';
+        } else if (filePath.startsWith('./product.html')) { // 处理产品请求
+            const query = url.parse(req.url, true).query; // 解析查询字符串
+            const productId = query.id; // 获取 id 参数
+            
+            // 从数据库中查询对应的产品
+            if (productId) {
+                db.query('SELECT * FROM featured_products WHERE product_id = ?', [productId], (err, results) => {
+                    if (err) {
+                        res.writeHead(500, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ error: '数据库查询失败' }));
+                        return;
+                    }
+                    if (results.length > 0) {
+                        res.writeHead(200, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify(results[0])); // 返回第一个匹配的产品
+                    } else {
+                        res.writeHead(404, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ error: '未找到该产品' }));
+                    }
+                });
+                return; // 请求已经处理完毕，返回
+            }
         }
 
         // 获取文件的扩展名
@@ -157,6 +185,4 @@ const server = http.createServer((req, res) => {
 server.listen(PORT, () => {
     console.log(`服务器在 http://localhost:${PORT} 启动`);
 });
-
-
 
